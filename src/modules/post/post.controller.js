@@ -1,6 +1,5 @@
 import Post from '../../../database/models/post.model.js';
 import User from '../../../database/models/user.model.js';
-import { isAuthenticated } from '../../middleware/authorization.js'; // Import the middleware
 
 // Create Post
 export async function createPost(req, res) {
