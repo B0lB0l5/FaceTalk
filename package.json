@@ -1,0 +1,21 @@
+{
+  "name": "ahmed-mohamed-fri-4-10-assignment6-01558839092",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "mysql2": "^3.10.3",
+    "nodemon": "^3.1.4",
+    "sequelize": "^6.37.3"
+  }
+}
