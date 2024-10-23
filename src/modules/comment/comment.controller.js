@@ -6,7 +6,7 @@ import User from '../../../database/models/user.model.js';
 export async function createComment(req, res) {
   try {
     const { content, postId } = req.body;
-    const userId = req.session.userId;
+    const userId = req.userId;
     const comment = await Comment.create({ content, postId, userId });
     res.status(201).json(comment);
   } catch (error) {
@@ -32,7 +32,7 @@ export async function updateComment(req, res) {
     const { content } = req.body;
     const comment = await Comment.findByPk(id);
     if (!comment) return res.status(404).json({ error: 'Comment not found' });
-    if (comment.userId !== req.session.userId) {
+    if (comment.userId !== req.userId) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
     comment.content = content;
@@ -49,7 +49,7 @@ export async function deleteComment(req, res) {
     const { id } = req.params;
     const comment = await Comment.findByPk(id);
     if (!comment) return res.status(404).json({ error: 'Comment not found' });
-    if (comment.userId !== req.session.userId) {
+    if (comment.userId !== req..userId) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
     await comment.destroy();

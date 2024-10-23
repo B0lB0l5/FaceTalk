@@ -33,8 +33,8 @@ export const login = async (req, res) => {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    // Set session and update the user's status to logged_in
-    req.session.userId = user.id;
+    //update the user's status to logged_in
+    req.userId = user.id;
     user.status = "logged_in";
     await user.save();
 
@@ -65,16 +65,10 @@ export const logout = async (req, res) => {
       return res.status(401).json({ error: "Invalid password" });
     }
 
-    // If authenticated, update the user's status and destroy the session
+    // If authenticated, update the user's status 
     user.status = "logged_out";
     await user.save();
-
-    req.session.destroy((err) => {
-      if (err) {
-        return res.status(500).json({ error: "Failed to logout" });
-      }
-      res.json({ message: "Logout successful" });
-    });
+    
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

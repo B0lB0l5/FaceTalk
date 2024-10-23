@@ -6,7 +6,7 @@ import { isAuthenticated } from '../../middleware/authorization.js'; // Import t
 export async function createPost(req, res) {
   try {
     const { title, content } = req.body;
-    const authorId = req.session.userId;
+    const authorId = req.userId;
     const post = await Post.create({ title, content, authorId });
     res.status(201).json(post);
   } catch (error) {
@@ -45,7 +45,7 @@ export async function updatePost(req, res) {
     if (!post) return res.status(404).json({ error: 'Post not found' });
 
     // Check if the post belongs to the logged-in user or if the user is an admin
-    if (post.authorId !== req.session.userId && !req.session.isAdmin) {
+    if (post.authorId !== req.userId && !req.isAdmin) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
@@ -66,7 +66,7 @@ export async function deletePost(req, res) {
     if (!post) return res.status(404).json({ error: 'Post not found' });
 
     // Check if the post belongs to the logged-in user or if the user is an admin
-    if (post.authorId !== req.session.userId && !req.session.isAdmin) {
+    if (post.authorId !== req.userId && !req.isAdmin) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
