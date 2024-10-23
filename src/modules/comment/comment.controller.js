@@ -49,7 +49,7 @@ export async function deleteComment(req, res) {
     const { id } = req.params;
     const comment = await Comment.findByPk(id);
     if (!comment) return res.status(404).json({ error: 'Comment not found' });
-    if (comment.userId !== req..userId) {
+    if (comment.userId !== req.userId) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
     await comment.destroy();
