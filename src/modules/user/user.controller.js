@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import User from "../../../../database/models/user.model.js";
+import User from "../../../database/models/user.model.js";
 
 // Register
 export const register = async (req, res) => {
